@@ -72,6 +72,7 @@ def tinyMazeSearch(problem):
     w = Directions.WEST
     return  [s, s, w, s, w, w, s, w]
 
+# Question 1: Brittney Oeur
 def depthFirstSearch(problem):
     """
     Search the deepest nodes in the search tree first.
@@ -89,74 +90,112 @@ def depthFirstSearch(problem):
     "*** YOUR CODE HERE ***"
     # Start state
     startNode = problem.getStartState()
+
     # Stack to keep track of nodes and the path taken
-    fringe = util.Stack()
+    nodesList = util.Stack()
+    # Pushing a tuple onto the stack
+    # startNode: current state/node
+    # []: Array list representing the path taken
+    # 0: Cost associated with reaching the current state
+    nodesList.push((startNode, [], 0))
+
     # List to keep track of visited nodes
     visited = []
 
-    fringe.push((startNode, [], 0))
+    # Loops as long the list is not empty
+    while nodesList:
+        currentNode, actions, costs = nodesList.pop();
 
-    while fringe:
-        currentNode, actions, costs = fringe.pop();
-
+        # If the current node have not been visited
         if currentNode not in visited:
+            # Add into visited list
             visited.append(currentNode)
 
+            # If goal state have been reached
             if problem.isGoalState(currentNode):
                 return actions
             
             for state, action, cost in problem.getSuccessors(currentNode):
                 if not state in visited:
-                    fringe.push((state, actions + [action], cost))
+                    # Pushes successors that have not been visited
+                    nodesList.push((state, actions + [action], cost))
         
     util.raiseNotDefined()
 
+# Question 2: Dhriti Roy & Brittney Oeur
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
     "*** YOUR CODE HERE ***"
     # Start state
     startNode = problem.getStartState()
-    fringe = util.Queue()
+
+    # Queue to keep track of nodes and the path taken
+    nodesList = util.Queue()
+
+    # Pushing a tuple onto the queue
+    # startNode: current queue/node
+    # []: Array list representing the path taken
+    # 0: Cost associated with reaching the current state
+    nodesList.push((startNode, [], 0))
+
+    # List to keep track of visited nodes
     visited = []
 
-    fringe.push((startNode, [], 0))
+    # Loops as long the list is not empty
+    while nodesList:
+        currentNode, actions, costs = nodesList.pop()
 
-    while fringe:
-        currentNode, actions, costs = fringe.pop()
-
+        # If the current node have not been visited
         if currentNode not in visited:
+            # Add into visited list
             visited.append(currentNode)
 
+            # If goal state have been reached
             if problem.isGoalState(currentNode):
                 return actions
 
             for state, action, cost in problem.getSuccessors(currentNode):
-                fringe.push((state, actions + [action], cost))
+                if not state in visited:
+                    # Pushes successors that have not been visited
+                    nodesList.push((state, actions + [action], cost))
 
     util.raiseNotDefined()
 
+# Question 3: Brittney Oeur
 def uniformCostSearch(problem):
     """Search the node of least total cost first."""
     "*** YOUR CODE HERE ***"
     # Start state
     startNode = problem.getStartState()
-    fringe = util.PriorityQueue()
+
+    # Queue to keep track of nodes and the path taken
+    nodesList = util.PriorityQueue()
+
+    # startNode: current queue/node
+    # []: Array list representing the path taken
+    # 0: Cost associated with reaching the current state
+    # 0: Highest priority
+    nodesList.push((startNode, [], 0), 0)
+
+    # List to keep track of visited nodes
     visited = []
 
-    fringe.push((startNode, [], 0), 0)
+    # Loops as long the list is not empty    
+    while nodesList:
+        currentNode, actions, costs = nodesList.pop()
 
-    while fringe:
-        currentNode, actions, costs = fringe.pop()
-
+        # If the current node have not been visited
         if currentNode not in visited:
             visited.append(currentNode)
 
+            # If goal state have been reached
             if problem.isGoalState(currentNode):
                 return actions
-            
+
             for state, action, cost in problem.getSuccessors(currentNode):
                 if state not in visited:
-                    fringe.push((state, actions + [action], costs + cost), costs+ cost)
+                    # Pushes successors that have not been visited
+                    nodesList.push((state, actions + [action], costs + cost), costs + cost)
         
     util.raiseNotDefined()
 
@@ -167,31 +206,46 @@ def nullHeuristic(state, problem=None):
     """
     return 0
 
+# Question 4: Dhriti Roy & Brittney Oeur
 def aStarSearch(problem, heuristic=nullHeuristic):
     """Search the node that has the lowest combined cost and heuristic first."""
     "*** YOUR CODE HERE ***"
+    # Start state
     startNode = problem.getStartState()
-    fringe = util.PriorityQueue()
+
+    # Queue to keep track of nodes and the path taken
+    nodesList = util.PriorityQueue()
+
+    # startNode: current queue/node
+    # []: Array list representing the path taken
+    # 0: Cost associated with reaching the current state
+    # 0: Highest priority
+    nodesList.push((startNode, [], 0), 0)
+
+    # List to keep track of visited nodes    
     visited = []
 
-    fringe.push((startNode, [], 0), 0)
+    # Loops as long the list is not empty    
+    while nodesList:
+        currentNode, actions, costs = nodesList.pop()
 
-    while fringe:
-        currentNode, actions, costs = fringe.pop()
-
+        # If the current node have not been visited
         if currentNode not in visited:
             visited.append(currentNode)
 
+            # If goal state have been reached
             if problem.isGoalState(currentNode):
                 return actions
             
             for state, action, cost in problem.getSuccessors(currentNode):
                 if state not in visited:
+                    # Retrieves the heuristic cost
                     heuristicCost = costs + cost + heuristic(state, problem)
-                    fringe.push((state, actions + [action], costs + cost), heuristicCost)
+
+                    # Pushes successors that have not been visited
+                    nodesList.push((state, actions + [action], costs + cost), heuristicCost)
 
     util.raiseNotDefined()
-
 
 # Abbreviations
 bfs = breadthFirstSearch

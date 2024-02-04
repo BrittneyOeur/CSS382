@@ -1,0 +1,55 @@
+Brittney Oeur & Dhriti Roy
+CSS 382 (Introduction To Artificial Intelligence)
+Search Problem
+
+Question 1: Finding a Fixed Food Dot using Depth First Search (Brittney’s Part)
+- This code defines a depth-first search algorithm for a search problem. It uses a stack to track nodes in the search tree, 
+where each node is represented as a tuple containing the current state, the path taken to reach that state, and the cost of reaching that state. 
+It explores the search space by popping nodes from the stack, storing them into an array list, and expanding their successors until it reaches a goal state, or has explored the entire tree. 
+The goal is to return a list of actions leading to the goal state.
+
+Question 2: Breadth First Search (Dhriti’s & Brittney’s Part)
+- This code defines a breadth-first search algorithm for a search problem. It uses a queue to track nodes in the search tree, 
+where each node is represented as a tuple containing the current state, the path taken to reach that state, and the cost of reaching that state. 
+It explores the search space by popping nodes from the queue, storing them into an array list, and expanding their successors until it reaches a goal state or has explored the entire tree. 
+The goal is to return a list of actions leading to the goal state.
+- Brittney: I mainly changed the variable names and changed the last for loop a bit.
+
+Question 3: Varying the Cost Function (Brittney’s Part)
+- This code defines a uniform-cost graph algorithm for a search problem. It uses a priority queue to track nodes in the search tree, 
+where each node is represented as a tuple containing the current state, the path taken to reach that state, the cost of reaching that state, and the priority element. 
+It explores the search space by popping nodes from the queue, storing them into an array list, and expanding their successors until it reaches a goal state, or has explored the entire tree. 
+The goal is to return a list of actions leading to the goal state.
+
+Question 4: A* Search (Dhriti’s & Brittney’s Part)
+- I included both implementations (Dhriti’s and mine)
+- This code defines an A* graph for a search problem. It uses a priority queue to figure out the cost to reach a node a heuristic function to estimate the remaining cost to the goal. 
+The use of the priority queue helps prioritize nodes based on the sum of the actual cost, the heuristic values, and the collective cost. 
+It explores the search space by popping nodes from the queue, storing them into an array list, and expanding their successors until it reaches a goal state, or has explored the entire tree. 
+The goal is to return a list of actions leading to the goal state.
+- Brittney: I mainly changed the variable names and changed the last for loop a bit.
+
+Question 5: Finding All the Corners (Brittney’s Part)
+- This code focuses on the corners of the mazes, in which it is to find the shortest path through the maze that touches all four corners (regardless there was food or not). 
+Methods include retrieving the start state, checking if the state is a goal, and retrieving the successors.
+- def **getStartState**(self): In which an empty list is created, and, a for loop to iterate each corner. It will then return a tuple.
+- def **isGoalState**(self, state): Check if the search state is a goal state, it checks the length of ‘state.’ of the first index, if it's zero, then the goal state has been reached (all corners are covered and removed)
+- def **getSuccessors**(self, state): Returns the successor states, the actions it requires, and a cost of 1. It creates a potential successor state, actions, and associated costs based on the moves of the grid. 
+For each direction, it will check if the move hits a wall. If not, it will then create a new state reflecting the potential move, update a list of remaining corners—if the new state is a corner, and add it to a tuple.
+
+Question 6: Corners Problem: Heuristic (Brittney’s Part)
+- I created my own implementation, which is why the code between hers and I will be different.
+- This code implements a non-trivial, consistent heuristic. The heuristic estimates the minimum distance from the current state to the goal, 
+by iteratively choosing the nearest remaining corner and adding its Manhattan distance to the heuristic value. It continues until all the corners have been visited.
+
+Question 7: Eating All the Dots (Dhriti’s & Brittney’s Part)
+- I included both implementations (Dhriti’s and mine)
+- The code implements a consistent heuristic to have Pacman eat all the dots. A list is created to store the uneaten food, and a list is created to keep track of distance. 
+It will then loop in the uneaten food list to see if there is any food, it then adds the Manhattan distance of the position and food. 
+Once it has been collected, it will retrieve the max value of the distance list, which assumes that Pacman might need to go to the farthest food first. 
+It Ensures that the estimated distance doesn't underestimate the actual cost.
+
+Question 8: Suboptimal Search (Brittney’s Part)
+- The code implements a suboptimal search, in which Pacman finds a reasonably quickly good path.
+- def **isGoalState**(self, state): It will check the current state is the goal state, as in, if Pacman encounters a dot it can eat, it is a goal state. If not, return false (there is no dot to eat).
+- def **findPathToClosestDot**(self, gameState): It will return the astar(problem) function. A* is used for its optimality and efficiency in finding the closest food dot.
