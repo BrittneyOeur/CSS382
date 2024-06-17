@@ -48,6 +48,7 @@ Question 7: Eating All the Dots (Dhriti’s & Brittney’s Part)
 It will then loop in the uneaten food list to see if there is any food, it then adds the Manhattan distance of the position and food. 
 Once it has been collected, it will retrieve the max value of the distance list, which assumes that Pacman might need to go to the farthest food first. 
 It Ensures that the estimated distance doesn't underestimate the actual cost.
+- The code works, however, it takes a moment for Pacman to start moving around the grid.
 
 Question 8: Suboptimal Search (Brittney’s Part)
 - The code implements a suboptimal search, in which Pacman finds a reasonably quickly good path.

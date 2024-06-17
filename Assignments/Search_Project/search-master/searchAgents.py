@@ -381,7 +381,6 @@ class CornersProblem(search.SearchProblem):
             if self.walls[x][y]: return 999999
         return len(actions)
 
-
 # Question 6: Brittney Oeur
 def cornersHeuristic(state, problem):
     """
@@ -424,6 +423,7 @@ def cornersHeuristic(state, problem):
         minDistance, corner = min(distantList)
 
         # Add the minimum distance 
+        # It is used to find the closest corner to the current node, in terms of Manhattan distance
         heuristicValue += minDistance
 
         # Set currentNode to the corner with minimum distance
